@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  - var image_names = ['coca.jpeg', 'coffee.jpeg', 'demi.jpeg', 'pepsi.jpeg', 'sprite.jpeg']
+  - var n =0
+  while n <3
+    - var randomIndex = Math.floor(Math.random() * 5)
+    img(src=`/images/${image_names[randomIndex]}` alt=image_names[randomIndex] height='300' width='300')
+    - n++

@@ -25,7 +25,7 @@ let instance2 = new
 Ramen({ramen_type:"buldakraman", calorie:530,
 cost:7.5});
 let instance3 = new
-Ramen({ramen_type:"neoguriramen", calorie:'260',
+Ramen({ramen_type:"neoguriramen", calorie:260,
 cost:5.3});
 instance1.save().then(doc=>{
  console.log("First object saved")}
@@ -48,10 +48,10 @@ if (reseed) {recreateDB();}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var beveragesRouter = require('./routes/Beverages');
+var ramenRouter = require('./routes/ramen');
 var gridRouter = require('./routes/grid');
 var randomRouter = require('./routes/pick');
-var resourceRouter =require('./routes/resource')
+var resourceRouter = require('./routes/resource')
 
 var app = express();
 
@@ -67,10 +67,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/Beverages', beveragesRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', randomRouter);
 app.use('/resource', resourceRouter);
+app.use('/ramen', ramenRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

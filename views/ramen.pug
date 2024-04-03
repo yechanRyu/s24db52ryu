@@ -1,0 +1,9 @@
+extends layout
+block content
+  h1= title
+  - let items = results
+  #container-fluid
+    #row
+      each item in results
+        #col-sm-2 
+         p #{item.ramen_type} #{item.calorie} #{item.cost}

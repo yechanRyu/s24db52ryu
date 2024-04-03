@@ -16,5 +16,5 @@ router.put('/ramen/:id', ramen_controller.ramen_update_put);
 // GET request for one Costume.
 router.get('/ramen/:id', ramen_controller.ramen_detail);
 // GET request for list of all Costume items.
-router.get('/raman', ramen_controller.ramen_list);
+router.get('/ramen', ramen_controller.ramen_list);
 module.exports = router;

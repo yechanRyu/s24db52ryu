@@ -11,9 +11,15 @@ exports.ramen_list = async function(req, res) {
     } 
 };
 // for a specific Costume.
-exports.ramen_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: Ramen detail: ' + req.params.id);
-};
+exports.ramen_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Ramen.findById(req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }};
 // Handle Costume create on POST.
 exports.ramen_create_post = async function(req, res) {
     console.log(req.body)
@@ -35,12 +41,39 @@ exports.ramen_create_post = async function(req, res) {
     }
    };
 // Handle Costume delete from on DELETE.
-exports.ramen_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Ramen delete DELETE ' + req.params.id);
+exports.ramen_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Ramen.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
 };
 // Handle Costume update form on PUT.
-exports.ramen_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: Ramen update PUT' + req.params.id);
+exports.ramen_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+     try {
+     let toUpdate = await Ramen.findById( req.params.id)
+     // Do updates of properties
+     if(req.body.ramen_type)
+        toUpdate.ramen_type = req.body.ramen_type;
+     if(req.body.calorie) toUpdate.calorie = req.body.calorie;
+     if(req.body.cost) toUpdate.cost = req.body.cost;
+     let result = await toUpdate.save();
+     console.log("Sucess " + result)
+     res.send(result)
+     } catch (err) {
+     res.status(500)
+     res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+     }
+    if(req.body.checkboxsale) toUpdate.sale = true;
+    else toUpdate.sale = false;
+
 };
 // VIEWS
 // Handle a show all view

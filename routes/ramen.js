@@ -9,3 +9,5 @@ router.get('/detail', ramen_controlers.ramen_view_one_Page);
 router.get('/create', ramen_controlers.ramen_create_Page);
 /* GET create update page */
 router.get('/update', ramen_controlers.ramen_update_Page);
+/* GET delete costume page */
+router.get('/delete', ramen_controlers.ramen_delete_Page);

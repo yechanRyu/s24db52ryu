@@ -1,0 +1,49 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let ramenid = toShow._id
+    - let ramen_type = toShow.ramen_type
+    - let ramencalorie = toShow.calorie
+    - let ramencost = toShow.cost
+    - let actionid = "/resource/ramen/" + ramenid
+    script let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='ramenAttr mr-3') Ramen ID is:
+        div #{ramenid}
+      div.row
+        div(class='ramenAttr mr-3') Ramen Type is:
+        div #{ramen_type}
+      div.row
+        div(class='ramenAttr mr-3') Ramen Calorie is:
+        div #{ramencalorie}
+      div.row
+        div(class='ramenAttr mr-3') Ramen Cost is:
+        div #{ramencost}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/ramen'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeded")
+          window.location.href='/ramen'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }

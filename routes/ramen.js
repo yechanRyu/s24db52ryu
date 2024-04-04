@@ -6,3 +6,4 @@ router.get('/', ramen_controlers.ramen_view_all_Page );
 module.exports = router;
 /* GET detail costume page */
 router.get('/detail', ramen_controlers.ramen_view_one_Page);
+router.get('/create', ramen_controlers.ramen_create_Page);

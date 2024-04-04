@@ -1,13 +1,14 @@
 extends layout
 block content
-  #container-fluid.text-center(style="background-color: green;")
-    h1= title
-    #btn-group.mt-3
-      a.btn.btn-primary(href="/ramen/create", style="background-color: green;") Create
-      a.btn.btn-secondary(href="/ramen/delete", style="background-color: red;") Delete All
-  - let items = results
-  #container-fluid(style="background-color: blue;")
-    #row(style="color: red; font-size:20px")
-      each item in results
-        #col-sm-2 
-         p #{item.ramen_type} #{item.calorie} #{item.cost}
+  h1= title
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch(\"/ramen/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.ramen_type}(Calorie: #{item.calorie}) is $#{item.cost}
+        button.btn(class="btn-primary ml-1", onclick= destination) Update
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }

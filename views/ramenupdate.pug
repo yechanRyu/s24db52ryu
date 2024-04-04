@@ -20,7 +20,7 @@ block content
       input#ramencalorie(type='number', name='ramencalorie', value= ramencalorie )
     div.form-group
       label.ramenAttr(for='ramencost') Ramen cost
-      input#ramencost(type='number', name='cost', value= ramencost)
+      input#ramencost(type='number', name='cost', value= ramencost min=2 max=10 step=0.1)
     input(type="submit")
 
   script.

@@ -1,0 +1,42 @@
+extends layout
+block content
+  h1= title
+    - let ramenid = toShow._id
+    - let ramen_type = toShow.ramen_type
+    - let ramencalorie = toShow.calorie
+    - let ramencost = toShow.cost
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{ramenid}
+
+  - let actionid = "/resource/ramen/" + ramenid
+  form(id='RamenForm', action= actionid, method="PUT")
+    div.form-group
+      label.ramenAttr(for='ramen_type') Ramen type
+      input#ramen_type(type='text', name='ramen_type', value= ramen_type )
+    div.form-group
+      label.ramenAttr(for='ramencalorie') Ramen Calorie
+      input#ramencalorie(type='number', name='ramencalorie', value= ramencalorie )
+    div.form-group
+      label.ramenAttr(for='ramencost') Ramen cost
+      input#ramencost(type='number', name='cost', value= ramencost)
+    input(type="submit")
+
+  script.
+    document.forms['RamenForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {// TODO handle error
+        alert("Update failed " + error )
+      });
+    });
+       

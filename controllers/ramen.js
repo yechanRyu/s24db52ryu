@@ -71,9 +71,6 @@ exports.ramen_update_put = async function(req, res) {
      res.send(`{"error": ${err}: Update for id ${req.params.id}
     failed`);
      }
-    if(req.body.checkboxsale) toUpdate.sale = true;
-    else toUpdate.sale = false;
-
 };
 // VIEWS
 // Handle a show all view
@@ -106,6 +103,19 @@ exports.ramen_create_Page = function(req, res) {
     console.log("create view")
     try{
     res.render('ramencreate', { title: 'Ramen Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+// Handle building the view for updating a costume.
+// query provides the id
+exports.ramen_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Ramen.findById(req.query.id)
+    res.render('ramenupdate', { title: 'Ramen Update', toShow: result });
     }
     catch(err){
     res.status(500)

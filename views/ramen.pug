@@ -1,9 +1,13 @@
 extends layout
 block content
-  h1= title
+  #container-fluid.text-center(style="background-color: green;")
+    h1= title
+    #btn-group.mt-3
+      a.btn.btn-primary(href="/ramen/create", style="background-color: green;") Create
+      a.btn.btn-secondary(href="/ramen/delete", style="background-color: red;") Delete All
   - let items = results
-  #container-fluid
-    #row
+  #container-fluid(style="background-color: blue;")
+    #row(style="color: red; font-size:20px")
       each item in results
         #col-sm-2 
          p #{item.ramen_type} #{item.calorie} #{item.cost}

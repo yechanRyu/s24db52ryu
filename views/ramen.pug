@@ -1,13 +1,18 @@
 extends layout
 block content
   h1= title
-  - let items = results;
+  - let items = results
+  a.btn.btn-primary(href="/ramen/create", style="background-color: green;") Go to create page
   div(class="container-fluid")
     div(class="row m-1")
       each item in items
         - let destination = `dispatch(\"/ramen/update?id=${item._id}\")`
+        - let destinationd = `dispatch(\"/ramen/detail?id=${item._id}\")`
+        - let destinationde = `dispatch(\"/ramen/delete?id=${item._id}\")`
         div(class="row-sm-2", class="m-1") Item #{item.ramen_type}(Calorie: #{item.calorie}) is $#{item.cost}
         button.btn(class="btn-primary ml-1", onclick= destination) Update
+        button.btn(class="btn-success ml-1", onclick= destinationd) Detail
+        button.btn(class="btn-danger ml-1", onclick= destinationde) Delete  
   script.
     function dispatch(path){
       window.location.href=path

@@ -16,11 +16,11 @@ router.get('/', ramen_controlers.ramen_view_all_Page );
 router.get('/detail', ramen_controlers.ramen_view_one_Page);
 
 /* GET create ramen page */
-router.get('/create', ramen_controlers.ramen_create_Page);
+router.get('/create', secured,ramen_controlers.ramen_create_Page);
 
 /* GET create update page */
 router.get('/update', secured, ramen_controlers.ramen_update_Page);
 
 /* GET delete costume page */
-router.get('/delete', ramen_controlers.ramen_delete_Page);
+router.get('/delete', secured,ramen_controlers.ramen_delete_Page);
 module.exports = router;
